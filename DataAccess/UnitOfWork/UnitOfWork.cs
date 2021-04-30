@@ -23,15 +23,16 @@ namespace DataAccess.UnitOfWork
         public IBoardRepository Boards { get; set; }
         public IColumnRepository Columns { get; set; }
         public ITaskRepository Tasks { get;  set; }
+        public IUserRepository Users { get; set; }
 
-        public Task<int> Complete()
+        public Task<int> SaveChangesAsync()
         {
             return _context.SaveChangesAsync();
         }
 
         public void Dispose()
         {
-            _context.DisposeAsync();
+            _context.Dispose();
         }
     }
 }

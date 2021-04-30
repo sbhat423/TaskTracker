@@ -15,5 +15,6 @@ namespace DataAccess.DataContext
         public DbSet<Board> Boards { get; set; }
         public DbSet<Column> Columns { get; set; }
         public DbSet<Task> Tasks { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

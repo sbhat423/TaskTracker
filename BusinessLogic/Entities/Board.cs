@@ -17,7 +17,10 @@ namespace Domain.Entities
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime CreatedOn { get; set; }
-
+        public int CreatorId { get; set; }
+        public List<int> BoardMemberIds { get; set; }
+        public virtual User Creator { get; set; }
+        public virtual List<User> BoardMembers { get; set; }
         public virtual List<Column> Columns { get; set; }
     }
 }

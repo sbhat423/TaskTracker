@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Domain.Interfaces
 {
@@ -19,11 +20,12 @@ namespace Domain.Interfaces
     /// <typeparam name="T"></typeparam>
     public interface IGenericRepository<T> where T : class
     {
-        T GetById(int id);
-        IEnumerable<T> GetAll();
+        Task<T> GetByIdAsync(int id);
+        Task<IEnumerable<T>> GetAllAsync();
         IEnumerable<T> Find(Expression<Func<T, bool>> expression);
-        void Add(T entity);
-        void AddRange(IEnumerable<T> entities);
+        Task AddAsync(T entity);
+        Task AddRangeAsync(IEnumerable<T> entities);
+        Task<T> UpdateAsync(int id, T entity);
         void Remove(T entity);
         void RemoveRange(IEnumerable<T> entities);
     }

@@ -10,6 +10,7 @@ namespace Domain.Interfaces
         IBoardRepository Boards { get; set; }
         IColumnRepository Columns { get; set; }
         ITaskRepository Tasks { get; set; }
-        Task<int> Complete();
+        IUserRepository Users { get; set; }
+        Task<int> SaveChangesAsync();
     }
 }

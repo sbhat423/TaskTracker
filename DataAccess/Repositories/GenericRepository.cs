@@ -1,9 +1,12 @@
 ﻿using DataAccess.DataContext;
 using Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DataAccess.Repositories
 {
@@ -15,37 +18,42 @@ namespace DataAccess.Repositories
             _context = context;
         }
 
-        public void Add(T entity)
+        public async Task AddAsync(T entity)
         {
-            throw new NotImplementedException();
+           await _context.Set<T>().AddAsync(entity);
         }
-
-        public void AddRange(IEnumerable<T> entities)
+        
+        public async Task AddRangeAsync(IEnumerable<T> entities)
         {
-            throw new NotImplementedException();
+           await _context.Set<T>().AddRangeAsync(entities);
         }
 
         public IEnumerable<T> Find(Expression<Func<T, bool>> expression)
         {
-            throw new NotImplementedException();
+            return _context.Set<T>().Where(expression);
         }
-
-        public IEnumerable<T> GetAll()
+        
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Set<T>().ToListAsync();
         }
-
-        public T GetById(int id)
+        
+        public async Task<T> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Set<T>().FindAsync(id);
         }
-
+        
         public void Remove(T entity)
         {
-            throw new NotImplementedException();
+            _context.Set<T>().Remove(entity);
+        }
+        
+        public void RemoveRange(IEnumerable<T> entities)
+        {
+            _context.Set<T>().RemoveRange(entities);
         }
 
-        public void RemoveRange(IEnumerable<T> entities)
+        public Task<T> UpdateAsync(int id, T entity)
         {
             throw new NotImplementedException();
         }

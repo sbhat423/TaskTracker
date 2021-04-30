@@ -17,13 +17,14 @@ namespace Domain.Entities
         [MaxLength(100)]
         public string Title { get; set; }
 
-        public string description { get; set; }
+        public string Description { get; set; }
         public virtual Column Status { get; set; }
-        // public virtual List<User> MyProperty { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
         public DateTime CreatedOn { get; set; }
         public int Order { get; set; }
         public List<string> Comments { get; set; }
+        public List<int> AssigneeIds { get; set; }
+        public virtual List<User> Assignees { get; set; }
     }
 }

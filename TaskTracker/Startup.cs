@@ -1,3 +1,4 @@
+using DataAccess.DataContext;
 using DataAccess.Repositories;
 using DataAccess.UnitOfWork;
 using Domain.Interfaces;
@@ -5,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -36,7 +38,10 @@ namespace TaskTracker
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TaskTracker", Version = "v1" });
             });
 
-            // Provide repository interface and implementation for services
+            // Provide configuration string of your DB as option to ApplicationDbContext (need to be move configurations to a separate configuration file)
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ProvideYourConnectionString")));
+
+            // Provide interface and its implementation for services
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddTransient<IBoardRepository, BoardRepository>();
